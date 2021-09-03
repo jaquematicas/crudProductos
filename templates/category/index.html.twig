@@ -1,0 +1,81 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Lista de Categorías{% endblock %}
+
+{% block body %}
+ {{ include('home.html.twig') }}
+ <div class="container">
+
+    <h1>Lista de Categorías</h1>
+
+     <a class="btn btn-success pull-right" href="{{ path('category_new') }}">Crear Categoría</a>
+
+ <table class="table table-bordered table-striped" id="tabla">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nombre</th>
+                <th>Estado</th>
+                <th>Creado</th>
+                <th>Modificado</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for cat in category %}
+            <tr>
+                <td>{{ cat.id }}</td>
+                <td>{{ cat.name }}</td>
+                {% if(cat.active==1)  %}
+                <td>Activo</td>
+                {% else %}
+                 <td>Inactivo</td>
+                 {% endif %}
+                <td>{{ cat.createdAt|date('Y-m-d H:i:s') }}</td>
+                <td>{{ cat.updatedAt|date('Y-m-d H:i:s') }}</td>
+                <td>
+                <a class="btn btn-info" href="{{ path('category_edit', {'id': cat.id}) }}">Editar</a>
+
+               
+              </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    </div>
+
+    <script type="text/javascript">
+    $("#tabla").DataTable({
+    language: {
+        "decimal": "",
+        "emptyTable": "No hay información",
+        "info": "Mostrando _START_ a _END_ de _TOTAL_ Entradas",
+        "infoEmpty": "Mostrando 0 to 0 of 0 Entradas",
+        "infoFiltered": "(Filtrado de _MAX_ total entradas)",
+        "infoPostFix": "",
+        "thousands": ",",
+        "lengthMenu": "Mostrar _MENU_ Entradas",
+        "loadingRecords": "Cargando...",
+        "processing": "Procesando...",
+        "search": "Buscar:",
+        "zeroRecords": "Sin resultados encontrados",
+        "paginate": {
+            "first": "Primero",
+            "last": "Ultimo",
+            "next": "Siguiente",
+            "previous": "Anterior"
+        },
+        
+      },
+
+  });
+    </script>
+
+{% endblock %}
+
+
+

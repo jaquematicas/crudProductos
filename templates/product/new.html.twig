@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nuevo Producto{% endblock %}
+
+
+
+{% block body %}
+
+   <div class="container">
+    <h3>Crear nuevo Producto</h3>
+ 
+  
+  
+
+    {{ include('product/_form.html.twig', {'button_label': 'Guardar'}) }}
+
+    	<div class="btn-group" role="group" aria-label="Basic example">
+      
+       <a href="{{ path('product_index') }}">Regresar</a>
+
+
+    </div>
+
+    
+{% endblock %}

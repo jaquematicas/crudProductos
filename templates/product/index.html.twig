@@ -1,0 +1,104 @@
+{% extends 'base.html.twig' %}
+
+
+
+
+
+
+{% block title %}Lista de Productos{% endblock %}
+
+{% block body %}
+    {{ include('home.html.twig') }}
+ <div class="container">
+    <h1>Lista de Productos</h1>
+
+     <a class="btn btn-success pull-right" href="{{ path('product_new') }}">Crear Producto</a>
+
+    <a class="btn btn-info pull-right" href="{{ path('export') }}">Exportar a Excel</a>
+ 
+ 
+    <table class="table table-bordered table-striped" id="tabla">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Código</th>
+                <th>Nombre</th>
+                <th>Descripción</th>
+                <th>Marca</th>
+                <th>Categoria</th>
+                <th>Precio</th>
+                <th>Creado</th>
+                <th>Modificado</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for prod in product %}
+            <tr>
+            <td>{{ prod.id }}</td>
+                <td>{{ prod.code }}</td>
+                <td>{{ prod.name }}</td>
+                <td>{{ prod.description }}</td>
+                 <td>{{ prod.brand }}</td>
+                 <td>{{ prod.getCategory().getName()
+                  }}</td>
+                  <td>{{ prod.price }}</td>
+    <td>{{ prod.createdAt |date('Y-m-d H:i:s') }}</td>
+                <td>{{ prod.updatedAt|date('Y-m-d H:i:s') }}</td>
+                <td>
+                <a class="btn btn-info" href="{{ path('product_edit', {'id': prod.id}) }}">Editar</a>
+
+                <a class="btn btn-danger" onclick="return confirm('¿Desea Eliminar Este Producto?')" href="{{ path('product_delete', {'id': prod.id}) }}">Eliminar</a>
+
+
+              </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    </div>
+
+    <script type="text/javascript">
+    $("#tabla").DataTable({
+    language: {
+        "decimal": "",
+        "emptyTable": "No hay información",
+        "info": "Mostrando _START_ a _END_ de _TOTAL_ Entradas",
+        "infoEmpty": "Mostrando 0 to 0 of 0 Entradas",
+        "infoFiltered": "(Filtrado de _MAX_ total entradas)",
+        "infoPostFix": "",
+        "thousands": ",",
+        "lengthMenu": "Mostrar _MENU_ Entradas",
+        "loadingRecords": "Cargando...",
+        "processing": "Procesando...",
+        "search": "Buscar:",
+        "zeroRecords": "Sin resultados encontrados",
+        "paginate": {
+            "first": "Primero",
+            "last": "Ultimo",
+            "next": "Siguiente",
+            "previous": "Anterior"
+        },
+        
+      },
+
+  });
+    </script>
+ 
+
+    {% endblock %}
+
+
+     
+
+   
+ 
+
+
+ 
+
+

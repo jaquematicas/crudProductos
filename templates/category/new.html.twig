@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nueva Categoría{% endblock %}
+
+
+
+{% block body %}
+ {{ include('home.html.twig') }}
+   <div class="container">
+    <h3>Crear nueva Categoría</h3>
+ 
+  
+  
+
+    {{ include('category/_form.html.twig', {'button_label': 'Guardar'}) }}
+
+    	<div class="btn-group" role="group" aria-label="Basic example">
+      
+       <a href="{{ path('category_index') }}">Regresar</a>
+
+
+    </div>
+
+    
+{% endblock %}
